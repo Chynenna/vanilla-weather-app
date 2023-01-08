@@ -26,10 +26,14 @@ function displayTemperature(response) {
     wind.innerHTML = Math.round(response.data.wind.speed);
     let time = document.querySelector("#time");
     time.innerHTML = formatDate(response.data.dt * 1000);
+    let icon = document.querySelector("#icon");
+    icon.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+    icon.setAttribute("alt", `${response.data.weather[0].description}`);
 }
 
 let apiKey = "0e1ea42ab98d62ef5c3bd1f9fae41cdd";
-let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=Kyiv&units=metric&appid=${apiKey}`;
+let city = "Kyiv";
+let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
 axios.get(apiURL).then(displayTemperature);
 
